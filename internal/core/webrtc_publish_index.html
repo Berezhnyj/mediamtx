@@ -55,38 +55,35 @@ select {
                 <option value="none">none</option>
             </select>
 
-            audio device:
-            <select id="audio_device">
+            <select id="audio_device" style="display: none;">
                 <option value="none">none</option>
             </select>
         </div>
-        <div id="codec_line">
+        <div id="codec_line" style="display: none;">
             video codec:
             <select id="video_codec">
             </select>
 
-            audio codec:
-            <select id="audio_codec">
+            <select id="audio_codec" style="display: none;">
             </select>
         </div>
         <div id="bitrate_line">
             video bitrate (kbps):
             <input id="video_bitrate" type="text" value="10000" />
 
-            audio bitrate (kbps):
-            <input id="audio_bitrate" type="text" value="32" />
+            <input id="audio_bitrate" type="text" value="32" style="display: none;"/>
 
-            <div>
+            <div style="display: none;">
                 <input id="audio_voice" type="checkbox" checked>
                 <label for="audio_voice">optimize for voice</label>
             </div>
         </div>
         <div id="submit_line">
-            <button id="publish_confirm">publish</button>
+            <button id="publish_confirm">publish SDK</button>
         </div>
     </div>
     <div id="transmitting" style="display: none;">
-        publishing
+        publishing SDK
     </div>
     <div id="error" style="display: none;">
         <span id="error-message"></span>
@@ -515,14 +512,14 @@ const populateDevices = () => {
                     }
                     break;
 
-                case 'audioinput':
-                    {
-                        const opt = document.createElement('option');
-                        opt.value = device.deviceId;
-                        opt.text = device.label;
-                        document.getElementById('audio_device').appendChild(opt);
-                    }
-                    break;
+                // case 'audioinput':
+                //     {
+                //         const opt = document.createElement('option');
+                //         opt.value = device.deviceId;
+                //         opt.text = device.label;
+                //         document.getElementById('audio_device').appendChild(opt);
+                //     }
+                //     break;
                 }
             }
 
@@ -549,7 +546,7 @@ const populateCodecs = () => {
         .then((desc) => {
             const sdp = desc.sdp.toLowerCase();
 
-            for (const codec of ['av1/90000', 'vp9/90000', 'vp8/90000', 'h264/90000']) {
+            for (const codec of ['h264/90000']) {
                 if (sdp.includes(codec)) {
                     const opt = document.createElement('option');
                     opt.value = codec;
